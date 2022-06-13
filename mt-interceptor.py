@@ -133,9 +133,8 @@ if to_fravatel == True:
             #registered_delivery=submit_sm.params['registered_delivery'],
             replace_if_present_flag=submit_sm.params['replace_if_present_flag'],
             #data_coding=submit_sm.params['data_coding'],
-            data_coding=submit_sm.params['data_coding'],
             #short_message=submit_sm.params['short_message'],
-            short_message = r"id:%s sub:%03d dlvrd:%03d submit date:%s done date:%s stat:%s err:%03d text: %s" % (
+            short_message = bytes(r"id:%s sub:%03d dlvrd:%03d submit date:%s done date:%s stat:%s err:%03d text: %s" % (
                 msgid,
                 1,
                 dlvrd,
@@ -144,7 +143,7 @@ if to_fravatel == True:
                 sm_message_stat,
                 err,
                 smpp_texto[:32],
-            ),
+            ), 'utf-8'),
             sm_default_msg_id=submit_sm.params['sm_default_msg_id'])
 
         log.info("Prepared a new deliver_sm: %s", deliver_sm)
